@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Handoff TV Player</title>
+
+    <!--
+      DNS Pre-resolution + TCP Pre-connection to our backend proxy.
+      This runs the moment the browser parses HTML — before any JS executes.
+      Saves 150–300ms of connection setup time on first video request.
+    -->
+    <link rel="preconnect" href="http://localhost:5000" />
+    <link rel="dns-prefetch" href="http://localhost:5000" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

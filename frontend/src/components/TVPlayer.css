@@ -1,0 +1,581 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   TV PLAYER — STREAMCAST UI
+   Dark, TV-optimized link-list dashboard with glass-morphism cards
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Root ─────────────────────────────────────────────────────────────────── */
+.tv-root {
+  min-height: 100vh;
+  background: #080c14;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(139, 92, 246, 0.10) 0%, transparent 60%);
+  font-family: 'Inter', sans-serif;
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.tv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tv-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tv-logo-icon {
+  color: #818cf8;
+  filter: drop-shadow(0 0 8px rgba(129, 140, 248, 0.6));
+}
+
+.tv-logo-text {
+  font-size: 1.35rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+.tv-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+}
+
+.tv-status.connected {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #4ade80;
+}
+
+.tv-status.offline {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #f87171;
+}
+
+.tv-header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.clear-all-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 999px;
+  color: #fca5a5;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clear-all-btn:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.card-actions-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0 4px;
+}
+
+.action-btn.delete-btn {
+  background: transparent;
+  color: #64748b;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.action-btn.delete-btn:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  transform: scale(1.1);
+}
+
+
+.tv-main {
+  flex: 1;
+  padding: 32px 40px 40px;
+  overflow-y: auto;
+}
+
+/* ── Empty State ──────────────────────────────────────────────────────────── */
+.tv-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 70vh;
+  text-align: center;
+}
+
+.tv-empty-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  color: #818cf8;
+}
+
+.pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(129,140,248,0.4);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+.pulse-ring.ring-2 {
+  animation-delay: 1.25s;
+  border-color: rgba(139,92,246,0.3);
+}
+
+@keyframes pulse {
+  0%   { transform: scale(0.9); opacity: 0.8; }
+  50%  { transform: scale(1.3); opacity: 0; }
+  100% { transform: scale(0.9); opacity: 0; }
+}
+
+.tv-empty h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.tv-empty p {
+  font-size: 1rem;
+  color: rgba(226,232,240,0.5);
+  line-height: 1.7;
+}
+
+.tv-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.tv-badge.connected {
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99,102,241,0.3);
+  color: #a5b4fc;
+}
+
+.tv-badge.offline {
+  background: rgba(100,116,139,0.12);
+  border: 1px solid rgba(100,116,139,0.2);
+  color: #94a3b8;
+}
+
+/* ── List Header ──────────────────────────────────────────────────────────── */
+.tv-list-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.tv-count {
+  background: rgba(99,102,241,0.2);
+  border: 1px solid rgba(99,102,241,0.3);
+  color: #a5b4fc;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* ── Link Cards ───────────────────────────────────────────────────────────── */
+.tv-link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tv-link-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tv-link-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(99,102,241,0.04) 0%, transparent 60%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.tv-link-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(99,102,241,0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(99,102,241,0.15);
+}
+
+/* Index number */
+.card-index {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.2) 0%, rgba(139,92,246,0.15) 100%);
+  border: 1px solid rgba(99,102,241,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #a5b4fc;
+}
+
+/* Info */
+.card-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.card-url {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  color: rgba(148, 163, 184, 0.6);
+}
+
+/* ── Action Buttons ───────────────────────────────────────────────────────── */
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.btn-icon {
+  font-size: 0.82rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Copy URL — primary action, works everywhere including Sony TV */
+.action-btn.copy-btn {
+  background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+  color: #99f6e4;
+  border: 1px solid rgba(20, 184, 166, 0.4);
+  box-shadow: 0 2px 12px rgba(15, 118, 110, 0.3);
+  font-weight: 700;
+}
+
+.action-btn.copy-btn:hover {
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+  box-shadow: 0 4px 20px rgba(20, 184, 166, 0.45);
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+.action-btn.copy-btn.copied {
+  background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+  color: #86efac;
+  border-color: rgba(34, 197, 94, 0.4);
+  box-shadow: 0 2px 12px rgba(22, 101, 52, 0.4);
+  animation: copied-pop 0.2s ease;
+}
+
+@keyframes copied-pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+
+.action-btn.mx {
+  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+  color: #bfdbfe;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  box-shadow: 0 2px 12px rgba(29, 78, 216, 0.3);
+}
+
+.action-btn.mx:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.5);
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+.action-btn.mx:active { transform: translateY(0); }
+
+/* VLC — Fiery orange */
+.action-btn.vlc {
+  background: linear-gradient(135deg, #92400e 0%, #b45309 100%);
+  color: #fed7aa;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  box-shadow: 0 2px 12px rgba(180, 83, 9, 0.3);
+}
+
+.action-btn.vlc:hover {
+  background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+  box-shadow: 0 4px 20px rgba(217, 119, 6, 0.5);
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+.action-btn.vlc:active { transform: translateY(0); }
+
+/* MX Player Pro — darker blue to distinguish from free */
+.action-btn.mx-pro {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 2px 12px rgba(30, 58, 138, 0.3);
+}
+
+.action-btn.mx-pro:hover {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+.action-btn.mx-pro:active { transform: translateY(0); }
+
+/* VLC alt (native vlc:// scheme) — slightly darker orange */
+.action-btn.vlc-native {
+  background: linear-gradient(135deg, #7c2d12 0%, #92400e 100%);
+  color: #fdba74;
+  border: 1px solid rgba(234, 88, 12, 0.3);
+  box-shadow: 0 2px 12px rgba(124, 45, 18, 0.3);
+}
+
+.action-btn.vlc-native:hover {
+  background: linear-gradient(135deg, #92400e 0%, #b45309 100%);
+  box-shadow: 0 4px 20px rgba(180, 83, 9, 0.4);
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+.action-btn.vlc-native:active { transform: translateY(0); }
+
+
+.action-btn.builtin {
+  background: linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(139,92,246,0.12) 100%);
+  color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35);
+}
+
+.action-btn.builtin:hover {
+  background: linear-gradient(135deg, rgba(99,102,241,0.3) 0%, rgba(139,92,246,0.25) 100%);
+  border-color: rgba(129,140,248,0.6);
+  box-shadow: 0 4px 20px rgba(99,102,241,0.3);
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+/* PC browser — dim MX/VLC buttons, they open Play Store as fallback */
+.action-btn.pc-only {
+  opacity: 0.5;
+  cursor: pointer;
+  position: relative;
+}
+
+.action-btn.pc-only::after {
+  content: 'Android only';
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #94a3b8;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+.action-btn.pc-only:hover::after { opacity: 1; }
+.action-btn.pc-only:hover { opacity: 0.75; }
+
+
+
+/* ── Player Overlay ───────────────────────────────────────────────────────── */
+.player-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.25s ease;
+}
+
+.overlay-close {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  z-index: 201;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.overlay-close:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}
+
+.overlay-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 202;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(8,12,20,0.9);
+  color: #a5b4fc;
+}
+
+.overlay-loading p {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.spin-icon {
+  animation: spin 1s linear infinite;
+  filter: drop-shadow(0 0 12px rgba(129,140,248,0.7));
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────────────── */
+.tv-main::-webkit-scrollbar        { width: 5px; }
+.tv-main::-webkit-scrollbar-track  { background: transparent; }
+.tv-main::-webkit-scrollbar-thumb  { background: rgba(99,102,241,0.3); border-radius: 99px; }
+
+/* ── Responsive (phone fallback) ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .tv-header { padding: 14px 18px; }
+  .tv-main   { padding: 20px 18px; }
+
+  .tv-link-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+  }
+
+  .card-actions { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
+
+  .action-btn { flex: 1; justify-content: center; padding: 10px 12px; font-size: 0.8rem; }
+}
