@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Premium TV Banner: 320 x 180 dp — Highly compatible Vector format -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="320dp"
+    android:height="180dp"
+    android:viewportWidth="320"
+    android:viewportHeight="180">
+
+    <!-- Background: Modern Dark Midnight -->
+    <path
+        android:fillColor="#0F172A"
+        android:pathData="M0,0h320v180h-320z" />
+    
+    <!-- Accent Gradient (Bottom Edge) -->
+    <path
+        android:fillColor="#1E293B"
+        android:pathData="M0,140h320v40h-320z" />
+
+    <!-- Stylized Play Icon Logo (Leftish) -->
+    <path
+        android:fillColor="#3B82F6"
+        android:pathData="M60,60l60,30l-60,30z" />
+    <path
+        android:fillColor="#60A5FA"
+        android:pathData="M70,75l30,15l-30,15z" />
+
+    <!-- "StreamCast TV" Text Styling (Simulated with paths for compatibility) -->
+    <!-- Large 'S' -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M140,75h40v10h-30v10h30v25h-40v-10h30v-10h-30z" />
+    
+    <!-- Supporting Text Lines -->
+    <path
+        android:fillColor="#94A3B8"
+        android:pathData="M140,115h120v4h-120z" />
+    <path
+        android:fillColor="#3B82F6"
+        android:pathData="M140,123h60v4h-60z" />
+
+</vector>
