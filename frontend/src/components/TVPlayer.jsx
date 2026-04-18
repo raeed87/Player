@@ -179,7 +179,7 @@ export default function TVPlayer() {
 
             <div className="tv-link-list">
               {links.map((link, i) => (
-                <div key={link.id ?? (link.url + i)} className="tv-link-card">
+                <div key={link.id || (link.url + i)} className="tv-link-card">
                   <div className="card-index">{i + 1}</div>
 
                   <div className="card-info">

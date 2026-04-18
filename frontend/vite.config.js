@@ -5,8 +5,11 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: true,   // expose on all network interfaces (LAN access)
+    host: true,
     port: 5173,
   },
+  build: {
+    target: 'chrome58', // Maximum compatibility for old Android TV WebViews
+  }
 })
 

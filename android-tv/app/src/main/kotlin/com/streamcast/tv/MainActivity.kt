@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var errorView: TextView
     
     // IMPORTANT: Replace this URL with your final Vercel deployment URL
-    private val TV_URL = "https://stream-cast-7wt7vzskj-raeed87s-projects.vercel.app"
+    private val TV_URL = "https://stream-cast-tv.vercel.app/tv"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
